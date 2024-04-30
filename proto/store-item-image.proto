@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package storeItemImage;
+
+message StoreItemImage {
+  string id = 1;
+  string image = 2;
+  int32 position = 3;
+  Slug storeItem = 4;
+}
+message StoreItemImageList {
+  repeated StoreItemImage storeItemImageList = 1;
+}
+
+message CreateImageRequest {
+  Slug storeItem = 1;
+  string image = 2;
+  int32 position = 3;
+}
+message ImageRequest {
+  string image = 1;
+}
+message Slug {
+  string slug = 1;
+}
+message StatusResponse {
+  bool status = 1;
+  string message = 2;
+}
+
+service StoreItemImageService {
+  rpc GetImagesByStoreItemSlug(Slug) returns (StoreItemImageList) {}
+  rpc CreateImage(CreateImageRequest) returns (StoreItemImage) {}
+  rpc DeleteImage(ImageRequest) returns (StatusResponse) {}
+}
+
+// protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ --ts_proto_opt=nestJs=true ./proto/store-item-image.proto

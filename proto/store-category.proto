@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package storeCategory;
+
+message Empty {}
+
+message StoreCategory {
+  string id = 1;
+  string language = 2;
+  string title = 3;
+  string subtitle = 4;
+  bool hidden = 5;
+  int32 position = 6;
+  repeated StoreItem storeItems = 7;
+}
+message StoreCategoryList {
+  repeated StoreCategory storeCategoryList = 1;
+}
+
+message StoreItem {
+  string slug = 1;
+  string language = 2;
+  string title = 3;
+  string description = 4;
+  string details = 5;
+  string sortKey = 6;
+  string sortValue = 7;
+  string country = 8;
+  string tm = 9;
+  int32 price = 10;
+  int32 oldPrice = 11;
+  int32 discount = 12;
+  int32 weight = 13;
+  bool hidden = 14;
+  int32 position = 15;
+}
+
+message Id {
+  string id = 1;
+}
+message Language {
+  string language = 1;
+}
+message CreateStoreCategoryRequest {
+  string language = 1;
+  string title = 2;
+  optional string subtitle = 3;
+  optional bool hidden = 4;
+  optional int32 position = 5;
+}
+message UpdateStoreCategoryRequest {
+  string id = 1;
+  optional string title = 3;
+  optional string subtitle = 4;
+  optional bool hidden = 5;
+  optional int32 position = 6;
+}
+message StatusResponse {
+  bool status = 1;
+  string message = 2;
+}
+
+service StoreCategoryService {
+  rpc GetAllStoreCategories(Empty) returns (StoreCategoryList) {}
+  rpc GetStoreCategoriesByLanguage(Language) returns (StoreCategoryList) {}
+  rpc GetStoreCategoryById(Id) returns (StoreCategory) {}
+  rpc CreateStoreCategory(CreateStoreCategoryRequest) returns (StoreCategory) {}
+  rpc UpdateStoreCategory(UpdateStoreCategoryRequest) returns (StoreCategory) {}
+  rpc DeleteStoreCategory(Id) returns (StatusResponse) {}
+}
+
+// protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ --ts_proto_opt=nestJs=true ./proto/store-category.proto

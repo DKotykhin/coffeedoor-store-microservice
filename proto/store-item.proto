@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package storeItem;
+
+message Empty {}
+
+message StoreItem {
+  string slug = 1;
+  string language = 2;
+  string title = 3;
+  string description = 4;
+  string details = 5;
+  string sortKey = 6;
+  string sortValue = 7;
+  string country = 8;
+  string tm = 9;
+  int32 price = 10;
+  int32 oldPrice = 11;
+  int32 discount = 12;
+  int32 weight = 13;
+  bool hidden = 14;
+  int32 position = 15;
+  Id category = 16;
+}
+message StoreItemList {
+  repeated StoreItem storeItemList = 1;
+}
+message StoreItemWithAd {
+  StoreItem storeItem = 1;
+  repeated StoreItem adList = 2;
+}
+
+message Id {
+  string id = 1;
+}
+message Slug {
+  string slug = 1;
+}
+message CreateStoreItemRequest {
+  string slug = 1;
+  string language = 2;
+  string title = 3;
+  optional string description = 4;
+  optional string details = 5;
+  optional string sortKey = 6;
+  optional string sortValue = 7;
+  optional string country = 8;
+  optional string tm = 9;
+  int32 price = 10;
+  optional int32 oldPrice = 11;
+  optional int32 discount = 12;
+  optional int32 weight = 13;
+  optional bool hidden = 14;
+  int32 position = 15;
+  Id category = 16;
+}
+message UpdateStoreItemRequest {
+  string slug = 1;
+  optional string title = 2;
+  optional string description = 3;
+  optional string details = 4;
+  optional string sortKey = 5;
+  optional string sortValue = 6;
+  optional string country = 7;
+  optional string tm = 8;
+  optional int32 price = 9;
+  optional int32 oldPrice = 10;
+  optional int32 discount = 11;
+  optional int32 weight = 12;
+  optional bool hidden = 13;
+  optional int32 position = 14;
+}
+
+message StatusResponse {
+  bool status = 1;
+  string message = 2;
+}
+
+service StoreItemService {
+  rpc GetStoreItemsByCategoryId(Id) returns (StoreItemList) {}
+  rpc GetStoreItemBySlug(Slug) returns (StoreItem) {}
+  rpc GetStoreItemBySlugWithAd(Slug) returns (StoreItemWithAd) {}
+  rpc CreateStoreItem(CreateStoreItemRequest) returns (StoreItem) {}
+  rpc UpdateStoreItem(UpdateStoreItemRequest) returns (StoreItem) {}
+  rpc DeleteStoreItem(Slug) returns (StatusResponse) {}
+}
+
+// protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ --ts_proto_opt=nestJs=true ./proto/store-item.proto
