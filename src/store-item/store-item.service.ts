@@ -39,10 +39,14 @@ export class StoreItemService {
 
   async findBySlug(slug: string): Promise<StoreItem> {
     try {
-      return await this.storeItemRepository.findOne({
+      const storeItem = await this.storeItemRepository.findOne({
         where: { slug },
         relations: ['category'],
       });
+      if (!storeItem) {
+        throw ErrorImplementation.notFound('Store item not found');
+      }
+      return storeItem;
     } catch (error) {
       this.logger.error(error?.message);
       throw ErrorImplementation.forbidden(error?.message);

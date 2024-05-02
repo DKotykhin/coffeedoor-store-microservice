@@ -38,6 +38,6 @@ async function bootstrap() {
     },
   });
   await app.startAllMicroservices();
-  logger.log('Menu microservice is running on ' + URL);
+  logger.log('Store microservice is running on ' + URL);
 }
 bootstrap();

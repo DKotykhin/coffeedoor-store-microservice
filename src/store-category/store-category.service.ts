@@ -57,10 +57,14 @@ export class StoreCategoryService {
 
   async findById(id: string): Promise<StoreCategory> {
     try {
-      return await this.storeCategoryRepository.findOne({
+      const storeCategory = await this.storeCategoryRepository.findOne({
         where: { id },
         relations: ['storeItems', 'storeItems.images'],
       });
+      if (!storeCategory) {
+        throw ErrorImplementation.notFound('Store category not found');
+      }
+      return storeCategory;
     } catch (error) {
       this.logger.error(error?.message);
       throw ErrorImplementation.notFound(error?.message);
