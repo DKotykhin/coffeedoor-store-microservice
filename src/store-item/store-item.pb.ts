@@ -24,6 +24,7 @@ export interface StoreItem {
   hidden: boolean;
   position: number;
   category: Id | undefined;
+  images: StoreItemImage[];
 }
 
 export interface StoreItemList {
@@ -33,6 +34,13 @@ export interface StoreItemList {
 export interface StoreItemWithAd {
   storeItem: StoreItem | undefined;
   adList: StoreItem[];
+}
+
+export interface StoreItemImage {
+  id: string;
+  image: string;
+  position: number;
+  storeItem: Slug | undefined;
 }
 
 export interface Id {

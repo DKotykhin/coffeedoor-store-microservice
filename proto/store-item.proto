@@ -21,6 +21,7 @@ message StoreItem {
   bool hidden = 14;
   int32 position = 15;
   Id category = 16;
+  repeated StoreItemImage images = 17;
 }
 message StoreItemList {
   repeated StoreItem storeItemList = 1;
@@ -28,6 +29,13 @@ message StoreItemList {
 message StoreItemWithAd {
   StoreItem storeItem = 1;
   repeated StoreItem adList = 2;
+}
+
+message StoreItemImage {
+  string id = 1;
+  string image = 2;
+  int32 position = 3;
+  Slug storeItem = 4;
 }
 
 message Id {

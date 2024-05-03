@@ -29,7 +29,9 @@ export class StoreItemService {
         order: {
           position: 'ASC',
         },
+        relations: ['category', 'images'],
       });
+
       return { storeItemList };
     } catch (error) {
       this.logger.error(error?.message);
@@ -41,7 +43,7 @@ export class StoreItemService {
     try {
       const storeItem = await this.storeItemRepository.findOne({
         where: { slug },
-        relations: ['category'],
+        relations: ['category', 'images'],
       });
       if (!storeItem) {
         throw ErrorImplementation.notFound('Store item not found');

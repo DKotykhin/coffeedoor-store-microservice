@@ -37,6 +37,18 @@ export interface StoreItem {
   weight: number;
   hidden: boolean;
   position: number;
+  images: StoreItemImage[];
+}
+
+export interface StoreItemImage {
+  id: string;
+  image: string;
+  position: number;
+  storeItem: Slug | undefined;
+}
+
+export interface Slug {
+  slug: string;
 }
 
 export interface Id {

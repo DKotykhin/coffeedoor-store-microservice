@@ -33,6 +33,17 @@ message StoreItem {
   int32 weight = 13;
   bool hidden = 14;
   int32 position = 15;
+  repeated StoreItemImage images = 16;
+}
+
+message StoreItemImage {
+  string id = 1;
+  string image = 2;
+  int32 position = 3;
+  Slug storeItem = 4;
+}
+message Slug {
+  string slug = 1;
 }
 
 message Id {
