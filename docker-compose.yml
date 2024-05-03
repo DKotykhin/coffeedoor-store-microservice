@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   app:
     container_name: store_microservice
@@ -12,6 +10,7 @@ services:
       - .env.stage.docker
 
   store_postgres_db:
+    container_name: postgres-store_db
     image: postgres:latest
     restart: always
     ports:
@@ -22,6 +21,7 @@ services:
       - pg_data:/var/lib/postgresql/data
 
   adminer:
+    container_name: adminer-store_db
     image: adminer
     restart: always
     ports:
