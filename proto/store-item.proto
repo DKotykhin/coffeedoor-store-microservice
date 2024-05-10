@@ -21,21 +21,38 @@ message StoreItem {
   bool hidden = 14;
   int32 position = 15;
   Id category = 16;
+}
+message StoreItemWithImages {
+  string slug = 1;
+  string language = 2;
+  string title = 3;
+  string description = 4;
+  string details = 5;
+  string sortKey = 6;
+  string sortValue = 7;
+  string country = 8;
+  string tm = 9;
+  int32 price = 10;
+  int32 oldPrice = 11;
+  int32 discount = 12;
+  int32 weight = 13;
+  bool hidden = 14;
+  int32 position = 15;
+  Id category = 16;
   repeated StoreItemImage images = 17;
 }
 message StoreItemList {
-  repeated StoreItem storeItemList = 1;
+  repeated StoreItemWithImages storeItemList = 1;
 }
 message StoreItemWithAd {
-  StoreItem storeItem = 1;
-  repeated StoreItem adList = 2;
+  StoreItemWithImages storeItem = 1;
+  repeated StoreItemWithImages adList = 2;
 }
 
 message StoreItemImage {
   string id = 1;
   string image = 2;
   int32 position = 3;
-  Slug storeItem = 4;
 }
 
 message Id {
@@ -86,7 +103,7 @@ message StatusResponse {
 
 service StoreItemService {
   rpc GetStoreItemsByCategoryId(Id) returns (StoreItemList) {}
-  rpc GetStoreItemBySlug(Slug) returns (StoreItem) {}
+  rpc GetStoreItemBySlug(Slug) returns (StoreItemWithImages) {}
   rpc GetStoreItemBySlugWithAd(Slug) returns (StoreItemWithAd) {}
   rpc CreateStoreItem(CreateStoreItemRequest) returns (StoreItem) {}
   rpc UpdateStoreItem(UpdateStoreItemRequest) returns (StoreItem) {}

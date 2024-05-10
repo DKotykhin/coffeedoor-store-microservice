@@ -10,6 +10,7 @@ import {
   StoreItemList,
   StoreItemServiceControllerMethods,
   StoreItemWithAd,
+  StoreItemWithImages,
   UpdateStoreItemRequest,
 } from './store-item.pb';
 
@@ -26,7 +27,7 @@ export class StoreItemController {
   }
 
   @GrpcMethod(STORE_ITEM_SERVICE_NAME, 'GetStoreItemBySlug')
-  getStoreItemBySlug({ slug }: { slug: string }): Promise<StoreItem> {
+  getStoreItemBySlug({ slug }: { slug: string }): Promise<StoreItemWithImages> {
     this.logger.log('Received get store item by slug request');
     return this.storeItemService.findBySlug(slug);
   }

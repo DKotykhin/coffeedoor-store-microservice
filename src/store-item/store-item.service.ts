@@ -8,8 +8,10 @@ import { StoreItem } from './entities/store-item.entity';
 import {
   CreateStoreItemRequest,
   StatusResponse,
+  StoreItem as StoreItemType,
   StoreItemList,
   StoreItemWithAd,
+  StoreItemWithImages,
   UpdateStoreItemRequest,
 } from './store-item.pb';
 
@@ -39,7 +41,7 @@ export class StoreItemService {
     }
   }
 
-  async findBySlug(slug: string): Promise<StoreItem> {
+  async findBySlug(slug: string): Promise<StoreItemWithImages> {
     try {
       const storeItem = await this.storeItemRepository.findOne({
         where: { slug },
@@ -89,7 +91,9 @@ export class StoreItemService {
     }
   }
 
-  async create(createStoreItemDto: CreateStoreItemRequest): Promise<StoreItem> {
+  async create(
+    createStoreItemDto: CreateStoreItemRequest,
+  ): Promise<StoreItemType> {
     try {
       return await this.entityManager.save(StoreItem, {
         ...createStoreItemDto,
@@ -103,7 +107,7 @@ export class StoreItemService {
 
   async update(
     updateStoreItemRequest: UpdateStoreItemRequest,
-  ): Promise<StoreItem> {
+  ): Promise<StoreItemType> {
     try {
       return await this.entityManager.transaction(async (manager) => {
         const storeItem = await manager.findOne(StoreItem, {

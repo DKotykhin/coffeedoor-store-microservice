@@ -14,11 +14,20 @@ export interface StoreCategory {
   subtitle: string;
   hidden: boolean;
   position: number;
+}
+
+export interface StoreCategoryWithItems {
+  id: string;
+  language: string;
+  title: string;
+  subtitle: string;
+  hidden: boolean;
+  position: number;
   storeItems: StoreItem[];
 }
 
 export interface StoreCategoryList {
-  storeCategoryList: StoreCategory[];
+  storeCategoryList: StoreCategoryWithItems[];
 }
 
 export interface StoreItem {
@@ -44,11 +53,6 @@ export interface StoreItemImage {
   id: string;
   image: string;
   position: number;
-  storeItem: Slug | undefined;
-}
-
-export interface Slug {
-  slug: string;
 }
 
 export interface Id {
@@ -87,7 +91,7 @@ export interface StoreCategoryServiceClient {
 
   getStoreCategoriesByLanguage(request: Language): Observable<StoreCategoryList>;
 
-  getStoreCategoryById(request: Id): Observable<StoreCategory>;
+  getStoreCategoryById(request: Id): Observable<StoreCategoryWithItems>;
 
   createStoreCategory(request: CreateStoreCategoryRequest): Observable<StoreCategory>;
 
@@ -103,7 +107,9 @@ export interface StoreCategoryServiceController {
     request: Language,
   ): Promise<StoreCategoryList> | Observable<StoreCategoryList> | StoreCategoryList;
 
-  getStoreCategoryById(request: Id): Promise<StoreCategory> | Observable<StoreCategory> | StoreCategory;
+  getStoreCategoryById(
+    request: Id,
+  ): Promise<StoreCategoryWithItems> | Observable<StoreCategoryWithItems> | StoreCategoryWithItems;
 
   createStoreCategory(
     request: CreateStoreCategoryRequest,

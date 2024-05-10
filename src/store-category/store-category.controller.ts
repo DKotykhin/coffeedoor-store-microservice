@@ -10,6 +10,7 @@ import {
   StoreCategory,
   StoreCategoryList,
   StoreCategoryServiceControllerMethods,
+  StoreCategoryWithItems,
   UpdateStoreCategoryRequest,
 } from './store-category.pb';
 
@@ -36,7 +37,11 @@ export class StoreCategoryController {
   }
 
   @GrpcMethod(STORE_CATEGORY_SERVICE_NAME, 'GetStoreCategoryById')
-  getStoreCategoryById({ id }: { id: string }): Promise<StoreCategory> {
+  getStoreCategoryById({
+    id,
+  }: {
+    id: string;
+  }): Promise<StoreCategoryWithItems> {
     this.logger.log('Received get store category by id request');
     return this.storeCategoryService.findById(id);
   }

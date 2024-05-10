@@ -9,6 +9,7 @@ import {
   CreateStoreCategoryRequest,
   StatusResponse,
   StoreCategoryList,
+  StoreCategoryWithItems,
   UpdateStoreCategoryRequest,
 } from './store-category.pb';
 
@@ -55,7 +56,7 @@ export class StoreCategoryService {
     }
   }
 
-  async findById(id: string): Promise<StoreCategory> {
+  async findById(id: string): Promise<StoreCategoryWithItems> {
     try {
       const storeCategory = await this.storeCategoryRepository.findOne({
         where: { id },
@@ -89,7 +90,9 @@ export class StoreCategoryService {
     updateStoreCategory: UpdateStoreCategoryRequest,
   ): Promise<StoreCategory> {
     try {
-      const storeCategory = await this.findById(updateStoreCategory.id);
+      const storeCategory = await this.storeCategoryRepository.findOne({
+        where: { id: updateStoreCategory.id },
+      });
       if (!storeCategory) {
         throw ErrorImplementation.notFound('Store category not found');
       }

@@ -11,10 +11,18 @@ message StoreCategory {
   string subtitle = 4;
   bool hidden = 5;
   int32 position = 6;
+}
+message StoreCategoryWithItems {
+  string id = 1;
+  string language = 2;
+  string title = 3;
+  string subtitle = 4;
+  bool hidden = 5;
+  int32 position = 6;
   repeated StoreItem storeItems = 7;
 }
 message StoreCategoryList {
-  repeated StoreCategory storeCategoryList = 1;
+  repeated StoreCategoryWithItems storeCategoryList = 1;
 }
 
 message StoreItem {
@@ -40,10 +48,6 @@ message StoreItemImage {
   string id = 1;
   string image = 2;
   int32 position = 3;
-  Slug storeItem = 4;
-}
-message Slug {
-  string slug = 1;
 }
 
 message Id {
@@ -74,7 +78,7 @@ message StatusResponse {
 service StoreCategoryService {
   rpc GetAllStoreCategories(Empty) returns (StoreCategoryList) {}
   rpc GetStoreCategoriesByLanguage(Language) returns (StoreCategoryList) {}
-  rpc GetStoreCategoryById(Id) returns (StoreCategory) {}
+  rpc GetStoreCategoryById(Id) returns (StoreCategoryWithItems) {}
   rpc CreateStoreCategory(CreateStoreCategoryRequest) returns (StoreCategory) {}
   rpc UpdateStoreCategory(UpdateStoreCategoryRequest) returns (StoreCategory) {}
   rpc DeleteStoreCategory(Id) returns (StatusResponse) {}
