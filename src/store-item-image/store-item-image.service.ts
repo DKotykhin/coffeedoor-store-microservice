@@ -26,7 +26,7 @@ export class StoreItemImageService {
       return { storeItemImageList };
     } catch (error) {
       this.logger.error(error?.message);
-      throw ErrorImplementation.forbidden(error?.message);
+      throw ErrorImplementation.notFound(error?.message);
     }
   }
 
@@ -55,7 +55,10 @@ export class StoreItemImageService {
       };
     } catch (error) {
       this.logger.error(error?.message);
-      throw ErrorImplementation.forbidden(error?.message);
+      throw new ErrorImplementation({
+        message: error?.message,
+        code: error.error?.code || 13,
+      });
     }
   }
 }

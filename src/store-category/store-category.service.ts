@@ -40,7 +40,7 @@ export class StoreCategoryService {
       return { storeCategoryList };
     } catch (error) {
       this.logger.error(error?.message);
-      throw ErrorImplementation.forbidden(error?.message);
+      throw ErrorImplementation.notFound(error?.message);
     }
   }
 
@@ -52,7 +52,7 @@ export class StoreCategoryService {
       return { storeCategoryList };
     } catch (error) {
       this.logger.error(error?.message);
-      throw ErrorImplementation.forbidden(error?.message);
+      throw ErrorImplementation.notFound(error?.message);
     }
   }
 
@@ -68,7 +68,10 @@ export class StoreCategoryService {
       return storeCategory;
     } catch (error) {
       this.logger.error(error?.message);
-      throw ErrorImplementation.notFound(error?.message);
+      throw new ErrorImplementation({
+        message: error?.message,
+        code: error.error?.code || 13,
+      });
     }
   }
 
@@ -100,7 +103,10 @@ export class StoreCategoryService {
       return await this.entityManager.save('StoreCategory', storeCategory);
     } catch (error) {
       this.logger.error(error?.message);
-      throw ErrorImplementation.forbidden(error?.message);
+      throw new ErrorImplementation({
+        message: error?.message,
+        code: error.error?.code || 13,
+      });
     }
   }
 
@@ -116,7 +122,10 @@ export class StoreCategoryService {
       };
     } catch (error) {
       this.logger.error(error?.message);
-      throw ErrorImplementation.forbidden(error?.message);
+      throw new ErrorImplementation({
+        message: error?.message,
+        code: error.error?.code || 13,
+      });
     }
   }
 }
