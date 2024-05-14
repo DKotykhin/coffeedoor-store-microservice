@@ -11,7 +11,6 @@ import {
 import { LanguageCode } from '../../database/db.enums';
 import { StoreCategory } from '../../store-category/entities/store-category.entity';
 import { StoreItemImage } from '../../store-item-image/entities/store-item-image.entity';
-import { Exclude } from 'class-transformer';
 
 @Entity()
 export class StoreItem {
@@ -72,7 +71,6 @@ export class StoreItem {
   })
   category: StoreCategory;
 
-  @Exclude()
   @OneToMany(() => StoreItemImage, (image) => image.storeItem, {
     onDelete: 'CASCADE',
   })
