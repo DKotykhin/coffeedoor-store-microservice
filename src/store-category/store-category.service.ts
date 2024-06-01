@@ -39,8 +39,8 @@ export class StoreCategoryService {
       });
       return { storeCategoryList };
     } catch (error) {
-      this.logger.error(error?.message);
-      throw ErrorImplementation.notFound(error?.message);
+      this.logger.error(error.message);
+      throw ErrorImplementation.notFound(error.message);
     }
   }
 
@@ -51,8 +51,8 @@ export class StoreCategoryService {
       });
       return { storeCategoryList };
     } catch (error) {
-      this.logger.error(error?.message);
-      throw ErrorImplementation.notFound(error?.message);
+      this.logger.error(error.message);
+      throw ErrorImplementation.notFound(error.message);
     }
   }
 
@@ -67,9 +67,9 @@ export class StoreCategoryService {
       }
       return storeCategory;
     } catch (error) {
-      this.logger.error(error?.message);
+      this.logger.error(error.message);
       throw new ErrorImplementation({
-        message: error?.message,
+        message: error.message,
         code: error.error?.code || 13,
       });
     }
@@ -84,8 +84,8 @@ export class StoreCategoryService {
         language: createStoreCategoryDto.language as LanguageCode,
       });
     } catch (error) {
-      this.logger.error(error?.message);
-      throw ErrorImplementation.forbidden(error?.message);
+      this.logger.error(error.message);
+      throw ErrorImplementation.forbidden(error.message);
     }
   }
 
@@ -102,9 +102,9 @@ export class StoreCategoryService {
       Object.assign(storeCategory, updateStoreCategory);
       return await this.entityManager.save('StoreCategory', storeCategory);
     } catch (error) {
-      this.logger.error(error?.message);
+      this.logger.error(error.message);
       throw new ErrorImplementation({
-        message: error?.message,
+        message: error.message,
         code: error.error?.code || 13,
       });
     }
@@ -121,9 +121,9 @@ export class StoreCategoryService {
         message: `Store category ${id} successfully deleted`,
       };
     } catch (error) {
-      this.logger.error(error?.message);
+      this.logger.error(error.message);
       throw new ErrorImplementation({
-        message: error?.message,
+        message: error.message,
         code: error.error?.code || 13,
       });
     }

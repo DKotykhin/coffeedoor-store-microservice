@@ -36,8 +36,8 @@ export class StoreItemService {
 
       return { storeItemList };
     } catch (error) {
-      this.logger.error(error?.message);
-      throw ErrorImplementation.notFound(error?.message);
+      this.logger.error(error.message);
+      throw ErrorImplementation.notFound(error.message);
     }
   }
 
@@ -52,9 +52,9 @@ export class StoreItemService {
       }
       return storeItem;
     } catch (error) {
-      this.logger.error(error?.message);
+      this.logger.error(error.message);
       throw new ErrorImplementation({
-        message: error?.message,
+        message: error.message,
         code: error.error?.code || 13,
       });
     }
@@ -89,8 +89,8 @@ export class StoreItemService {
         adList,
       };
     } catch (error) {
-      this.logger.error(error?.message);
-      throw ErrorImplementation.forbidden(error?.message);
+      this.logger.error(error.message);
+      throw ErrorImplementation.forbidden(error.message);
     }
   }
 
@@ -103,8 +103,8 @@ export class StoreItemService {
         language: createStoreItemDto.language as LanguageCode,
       });
     } catch (error) {
-      this.logger.error(error?.message);
-      throw ErrorImplementation.forbidden(error?.message);
+      this.logger.error(error.message);
+      throw ErrorImplementation.forbidden(error.message);
     }
   }
 
@@ -125,9 +125,9 @@ export class StoreItemService {
         });
       });
     } catch (error) {
-      this.logger.error(error?.message);
+      this.logger.error(error.message);
       throw new ErrorImplementation({
-        message: error?.message,
+        message: error.message,
         code: error.error?.code || 13,
       });
     }
@@ -144,9 +144,9 @@ export class StoreItemService {
         message: `Store item ${slug} successfully deleted`,
       };
     } catch (error) {
-      this.logger.error(error?.message);
+      this.logger.error(error.message);
       throw new ErrorImplementation({
-        message: error?.message,
+        message: error.message,
         code: error.error?.code || 13,
       });
     }

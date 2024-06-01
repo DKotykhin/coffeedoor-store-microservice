@@ -25,8 +25,8 @@ export class StoreItemImageService {
       });
       return { storeItemImageList };
     } catch (error) {
-      this.logger.error(error?.message);
-      throw ErrorImplementation.notFound(error?.message);
+      this.logger.error(error.message);
+      throw ErrorImplementation.notFound(error.message);
     }
   }
 
@@ -38,8 +38,8 @@ export class StoreItemImageService {
         ...createImageRequest,
       });
     } catch (error) {
-      this.logger.error(error?.message);
-      throw ErrorImplementation.forbidden(error?.message);
+      this.logger.error(error.message);
+      throw ErrorImplementation.forbidden(error.message);
     }
   }
 
@@ -54,9 +54,9 @@ export class StoreItemImageService {
         message: `Image ${image} deleted successfully`,
       };
     } catch (error) {
-      this.logger.error(error?.message);
+      this.logger.error(error.message);
       throw new ErrorImplementation({
-        message: error?.message,
+        message: error.message,
         code: error.error?.code || 13,
       });
     }
